@@ -58,7 +58,7 @@ const RecipeDetails = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="px-4 py-8 max-w-4xl mx-auto">
+    <div className="px-4 py-8 max-w-4xl mx-auto min-h-[60vh]">
       <h2 className="text-xl text-gray-700 mb-2">{likeCount} people interested in this recipe</h2>
       <h1 className="text-3xl font-bold text-orange-500 mb-4">{recipe.name}</h1>
       <img
@@ -66,9 +66,9 @@ const RecipeDetails = () => {
         alt={recipe.name}
         className="w-full h-64 object-cover rounded-lg mb-4"
       />
-      <p className="text-gray-700 mb-2">Cuisine: {recipe.cuisine || "Unknown"}</p>
-      <p className="text-gray-700 mb-2">Prep Time: {recipe.prepTime || "N/A"}</p>
-      <p className="text-gray-700 mb-2">Difficulty: {recipe.difficulty || "Medium"}</p>
+      <p className="text-base mb-2">Cuisine: {recipe.cuisine || "Unknown"}</p>
+      <p className="text-base mb-2">Prep Time: {recipe.prepTime || "N/A"}</p>
+      <p className="text-base mb-2">Difficulty: {recipe.difficulty || "Medium"}</p>
 
       <button
         onClick={handleLike}

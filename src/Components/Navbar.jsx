@@ -78,7 +78,7 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 left-0 w-full bg-base-100 shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center py-3">
-          {/* Logo */}
+   
           <Link
             to="/"
             className="text-2xl font-bold text-orange-500 whitespace-nowrap"
@@ -86,7 +86,7 @@ const Navbar = () => {
             Recipe Book
           </Link>
 
-          {/* Hamburger (Mobile) */}
+     
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden p-2 border rounded-md border-orange-400 text-orange-500 hover:bg-orange-500 hover:text-white transition"
@@ -116,10 +116,10 @@ const Navbar = () => {
             </svg>
           </button>
 
-          {/* Desktop Links */}
+  
           <ul className="hidden lg:flex gap-6 font-semibold">{navLinks}</ul>
 
-          {/* Right Section */}
+     
           <div className="hidden lg:flex items-center gap-4">
             <div className="relative group cursor-pointer">
               <div className="w-10 h-10 rounded-full border border-orange-500 overflow-hidden">
@@ -159,7 +159,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {menuOpen && (
           <div className="lg:hidden bg-base-100 shadow-md px-6 pb-4 space-y-3 font-semibold">
             <ul onClick={() => setMenuOpen(false)} className="flex flex-col gap-3">

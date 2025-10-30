@@ -2,7 +2,7 @@ import image from '../assets/pexels-ella-olsson-572949-1640777.jpg';
 
 const HeroArea = () => {
   return (
-    <div className="relative mx-auto max-w-7xl h-[500px] my-5 overflow-hidden">
+    <div className="relative mx-auto max-w-7xl h-[500px] -mt-9 overflow-hidden rounded-md">
       <img className="w-full h-full object-cover" src={image} alt="Delicious food" />
       
  

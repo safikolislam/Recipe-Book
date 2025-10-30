@@ -14,7 +14,6 @@ const MyRecipe = ({ userEmail }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const { register, handleSubmit, reset } = useForm();
 
-
   const { data: recipes = [], isLoading, isError, error } = useQuery({
     queryKey: ["myRecipes", userEmail],
     queryFn: async () => {
@@ -23,12 +22,10 @@ const MyRecipe = ({ userEmail }) => {
     },
   });
 
-
   const deleteMutation = useMutation({
     mutationFn: (id) => axios.delete(`${import.meta.env.VITE_API_URL}/Recipe/${id}`),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["myRecipes", userEmail] }),
   });
-
 
   const updateMutation = useMutation({
     mutationFn: (updatedRecipe) =>
@@ -54,7 +51,7 @@ const MyRecipe = ({ userEmail }) => {
   if (isError)
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center space-y-3">
-        <p className="text-2xl font-semibold text-red-500">Failed to load your recipes</p>
+        <p className="text-2xl font-semibold text-error">Failed to load your recipes</p>
         <p className="text-base text-base-content/70">{error?.message || "Unknown error"}</p>
       </div>
     );
@@ -63,29 +60,24 @@ const MyRecipe = ({ userEmail }) => {
     return (
       <div className="flex flex-col items-center justify-center mt-16 min-h-[100vh]">
         <img className="w-60 md:w-80 rounded-lg shadow-lg" src={noData} alt="No Recipes Found" />
-        <p className="mt-5 text-2xl font-semibold text-white">No Recipes Found</p>
-        <p className="text-sm text-white/70 mt-2">Try adding a new recipe to get started!</p>
+        <p className="mt-5 text-2xl font-semibold text-base-content">No Recipes Found</p>
+        <p className="text-sm text-base-content/70 mt-2">Try adding a new recipe to get started!</p>
       </div>
     );
 
   return (
     <div className="p-5 min-h-screen relative">
-  
-      <div
-        className={`transition-all duration-300 ${
-          modalIsOpen ? "filter blur-sm pointer-events-none" : ""
-        }`}
-      >
-        <h1 className="text-3xl font-bold text-orange-500 mb-5 text-center">My Recipes</h1>
+      <div className={`transition-all duration-300 ${modalIsOpen ? "filter blur-sm pointer-events-none" : ""}`}>
+        <h1 className="text-3xl font-bold text-primary mb-5 text-center">My Recipes</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {recipes.map((recipe) => (
-            <div key={recipe._id} className="card bg-white shadow-lg border border-orange-500">
+            <div key={recipe._id} className="card bg-base-100 shadow-md border border-base-300">
               <figure>
-                <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover" />
+                <img src={recipe.image || noData} alt={recipe.title} className="w-full h-48 object-cover" />
               </figure>
-              <div className="card-body text-black">
-                <h2 className="card-title text-orange-500">{recipe.title}</h2>
+              <div className="card-body text-base-content">
+                <h2 className="card-title text-primary">{recipe.title}</h2>
                 <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
                 <p><strong>Instructions:</strong> {recipe.instructions}</p>
                 <p><strong>Cuisine:</strong> {recipe.cuisine}</p>
@@ -93,16 +85,10 @@ const MyRecipe = ({ userEmail }) => {
                 <p><strong>Category:</strong> {recipe.category}</p>
                 <p><strong>Likes:</strong> {recipe.likes || 0}</p>
                 <div className="card-actions justify-end mt-2">
-                  <button
-                    onClick={() => handleUpdate(recipe)}
-                    className="btn btn-sm btn-outline btn-warning"
-                  >
+                  <button onClick={() => handleUpdate(recipe)} className="btn btn-sm btn-outline btn-primary">
                     Update
                   </button>
-                  <button
-                    onClick={() => handleDelete(recipe._id)}
-                    className="btn btn-sm btn-outline btn-error"
-                  >
+                  <button onClick={() => handleDelete(recipe._id)} className="btn btn-sm btn-outline btn-error">
                     Delete
                   </button>
                 </div>
@@ -112,15 +98,14 @@ const MyRecipe = ({ userEmail }) => {
         </div>
       </div>
 
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         contentLabel="Update Recipe"
-        className="bg-white p-5 w-[400px] mx-auto rounded-lg shadow-lg outline-none z-50 relative transition-transform duration-300"
+        className="bg-base-100 p-5 w-[400px] mx-auto rounded-lg shadow-lg outline-none z-50 relative transition-transform duration-300"
         overlayClassName="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-40"
       >
-        <h2 className="text-2xl text-orange-500 mb-4">Update Recipe</h2>
+        <h2 className="text-2xl text-primary mb-4">Update Recipe</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
           <input {...register("title")} placeholder="Title" className="input input-bordered w-full" />
           <input {...register("image")} placeholder="Image URL" className="input input-bordered w-full" />
@@ -134,7 +119,7 @@ const MyRecipe = ({ userEmail }) => {
             <button type="button" onClick={() => setModalIsOpen(false)} className="btn btn-outline">
               Cancel
             </button>
-            <button type="submit" className="btn btn-warning">Update</button>
+            <button type="submit" className="btn btn-primary">Update</button>
           </div>
         </form>
       </Modal>
@@ -143,6 +128,7 @@ const MyRecipe = ({ userEmail }) => {
 };
 
 export default MyRecipe;
+
 
 
 

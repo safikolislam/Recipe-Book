@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -9,7 +8,6 @@ import noData from "../../assets/no-data found.avif";
 const AllRecipes = () => {
   const navigate = useNavigate();
 
- 
   const { data: recipes = [], isLoading, isError, error } = useQuery({
     queryKey: ["recipes"],
     queryFn: async () => {
@@ -19,11 +17,15 @@ const AllRecipes = () => {
   });
 
   if (isLoading) return <Loading />;
-  if (isError) return <p className="text-red-500 text-center mt-8">Error: {error.message}</p>;
+  if (isError) return (
+    <p className="text-error text-center mt-8">
+      Error: {error.message}
+    </p>
+  );
 
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold text-orange-500 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-primary mb-6 text-center">
         All Recipes
       </h1>
 
@@ -36,7 +38,7 @@ const AllRecipes = () => {
           {recipes.map((recipe) => (
             <div
               key={recipe._id}
-              className="card bg-white dark:bg-gray-900 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition duration-300"
+              className="card bg-base-100 shadow-md border border-base-300 hover:shadow-xl transition duration-300"
             >
               <figure className="px-4 pt-4">
                 <img
@@ -46,22 +48,22 @@ const AllRecipes = () => {
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title text-orange-500 dark:text-orange-400">
+                <h2 className="card-title text-primary">
                   {recipe.name}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-base-content">
                   Cuisine: {recipe.cuisine || "Unknown"}
                 </p>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-base-content">
                   Prep Time: {recipe.prepTime || "N/A"}
                 </p>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-base-content">
                   Difficulty: {recipe.difficulty || "Medium"}
                 </p>
                 <div className="card-actions justify-end mt-2">
                   <button
                     onClick={() => navigate(`/recipe/${recipe._id}`)}
-                    className="btn btn-outline btn-warning text-orange-500 border-orange-500 hover:bg-orange-500 hover:text-white"
+                    className="btn btn-outline btn-primary"
                   >
                     See Details
                   </button>
@@ -76,6 +78,7 @@ const AllRecipes = () => {
 };
 
 export default AllRecipes;
+
 
 
 

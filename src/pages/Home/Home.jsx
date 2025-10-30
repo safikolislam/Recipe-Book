@@ -32,7 +32,7 @@ const Home = () => {
 
     <LatestRecipes></LatestRecipes>
       <section className="py-10 px-5 bg-base-100 text-base-content transition-colors duration-300">
-        <h2 className="text-center text-3xl font-semibold mt-20 text-orange-500">
+        <h2 className="text-center text-3xl font-semibold my-20 text-orange-500">
           Featured Recipes
         </h2>
         <div className="flex flex-wrap justify-center gap-8">
